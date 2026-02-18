@@ -1,0 +1,16 @@
+# dune build
+# OCAMLPARAM: unset
+# Shared cache: enabled-except-user-rules
+# Shared cache location: /home/cis4521/.cache/dune/db
+# Workspace root: /workspaces/coursework-1a/coursework-1a
+# Auto-detected concurrency: 16
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dev
+#  ; merlin = true
+#  ; fdo_target_exe = None
+#  ; build_dir = In_build_dir "default"
+#  ; instrument_with = []
+#  }
+$ /home/cis4521/.opam/4.14.1/bin/ocamlc.opt -config > /tmp/dune_fad759_output
