@@ -147,12 +147,10 @@ let interp_cnd {fo; fs; fz} : cnd -> bool = fun x -> (* return a function that m
 match x with
 | Eq ->  fz (*overflow cant occur*)
 | Neq -> not (fz) (*overflow doesnt matter*)
-| Gt -> (fs = fo) && not fz (* fs XOR fo gives the actual sign value, if fs = fo then its positive*)
-
-
-| Ge -> (not fs || fz)&& not fo(* when arg1 >= arg2*)
-| Lt -> fs || not fo
-| Le -> (fs || fz) && not fo
+| Gt -> (fs = fo) && not fz (*fs XOR fo gives the actual sign value, if fs = fo then its positive(0 included)*)
+| Ge -> (fs = fo)
+| Lt -> fs<>fo (*Negative, opposite of fs = fo*)
+| Le -> (fs<>fo) || fz (*Negative or 0*)
 
 
 (* Maps an X86lite address into Some OCaml array index,
