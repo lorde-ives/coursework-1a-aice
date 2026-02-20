@@ -143,7 +143,15 @@ let sbytes_of_data : data -> sbyte list = function
 let debug_simulator = ref false
 
 (* Interpret a condition code with respect to the given flags. *)
-let interp_cnd {fo; fs; fz} : cnd -> bool = fun x -> failwith "interp_cnd unimplemented"
+let interp_cnd {fo; fs; fz} : cnd -> bool = fun x -> (* return a function that matches a condition to bool*)
+  match x with
+  | Eq ->  fz 
+  | Neq -> not (fz) 
+  | Gt -> (fo = fs) && not fz (*when overflow, sign flips, same for underflow*)
+  | Ge -> (fo = fs) || fz (* when arg1 >= arg2*)
+  | Lt -> (fo <> fs) && not fz
+  | Le -> (fo <> fs) || fz
+  
 
 
 
