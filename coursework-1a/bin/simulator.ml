@@ -145,18 +145,21 @@ let debug_simulator = ref false
 (* Interpret a condition code with respect to the given flags. *)
 let interp_cnd {fo; fs; fz} : cnd -> bool = fun x -> (* return a function that matches a condition to bool*)
 match x with
-| Eq ->  fz (*overflow cant occur*)
-| Neq -> not (fz) (*overflow doesnt matter*)
-| Gt -> (fs = fo) && not fz (*fs XOR fo gives the actual sign value, if fs = fo then its positive(0 included)*)
+| Eq ->  fz 
+| Neq -> not (fz)
+| Gt -> (fs = fo) && not fz 
 | Ge -> (fs = fo)
-| Lt -> fs<>fo (*Negative, opposite of fs = fo*)
-| Le -> (fs<>fo) || fz (*Negative or 0*)
+| Lt -> fs<>fo 
+| Le -> (fs<>fo) || fz 
 
 
 (* Maps an X86lite address into Some OCaml array index,
    or None if the address is not within the legal address space. *)
 let map_addr (addr:quad) : int option =
-  failwith "map_addr not implemented"
+  if addr >= mem_bot && addr < mem_top then
+     Some(Int64.to_int (Int64.sub addr mem_bot))
+  else
+    None
 
 (* Simulates one step of the machine:
     - fetch the instruction at %rip
