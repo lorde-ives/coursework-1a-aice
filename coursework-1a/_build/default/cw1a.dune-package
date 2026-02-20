@@ -1,4 +1,0 @@
-(lang dune 3.21)
-(name cw1a)
-(sections (lib .) (bin ../../bin) (doc ../../doc/cw1a))
-(files (lib (META dune-package opam)) (bin (main)) (doc (README.md)))
