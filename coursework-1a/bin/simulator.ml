@@ -148,8 +148,8 @@ let interp_cnd {fo; fs; fz} : cnd -> bool = fun x -> (* return a function that m
   | Eq ->  fz 
   | Neq -> not (fz) 
   | Gt -> (fo = fs) && not fz (*when overflow, sign flips, same for underflow*)
-  | Ge -> (fo = fs) || fz (* when arg1 >= arg2*)
-  | Lt -> (fo <> fs) && not fz
+  | Ge -> (fo = fs) (* weird but it's defined this way *)
+  | Lt -> (fo <> fs) (* again i think it should have not fz but that's the spec...*)
   | Le -> (fo <> fs) || fz
   
 
